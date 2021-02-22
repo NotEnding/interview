@@ -24,14 +24,15 @@
 '''
 https://blog.csdn.net/weixin_43790276/article/details/104033622
 代码中，i 表示第几轮“冒泡”，j 表示“走访”到的元素索引。每一轮“冒泡”中，j 需要从列表开头“走访”到 len(array) - i 的位置。
+时间复杂度   O(n^2)
 '''
 
 
 #增序排列
 def bubble_sort_asc(array):
-    for i in range(1, len(array)):
+    for i in range(1, len(array)): #表示第几轮
         # print(f"当前第:{i}轮")
-        for j in range(0, len(array) - i):
+        for j in range(0, len(array) - i): #从列表开头走访到 len(array) - i
             # print(f"当前比较的元素索引:{j}")
             if array[j] > array[j + 1]:
                 array[j], array[j + 1] = array[j + 1], array[j]
