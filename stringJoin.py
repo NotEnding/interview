@@ -1,7 +1,7 @@
 #-*- coding:utf-8 _*- 
 """ 
-@file: Fibonacci.py 
-@time: 2021/02/22
+@file: stringJoin.py 
+@time: 2021/02/23
 @site:  
 @software: PyCharm 
 
@@ -20,23 +20,14 @@
                   ┃┫┫  ┃┫┫
                   ┗┻┛  ┗┻┛ 
 """
+#x=”abc”,y=”def”,z=[“d”,”e”,”f”],分别求出x.join(y)和x.join(z)返回的结果
 
-'''
-0 1 1 2 3 5 8 13 21 34 55
-斐波那契数列----yield 用法
-'''
+x = 'abc'
+y = 'def'
+z = ['d', 'e', 'f']
 
+#返回一个字符串，它是字符串中字符串的串联可迭代的。 元素之间的分隔符是S。
 
-def fab(max):
-    n, a, b = 0, 0, 1
-    while n < max:
-        yield b  # 使用 yield ，相当于return,下一步直接从这里开始执行
-        print(f"a:{a},b:{b}")
-        a, b = b, a + b
-        print(f"a>>>{a},b>>>{b}")
-        n = n + 1
-
-
-f = fab(11)
-for i in range(10):
-    print(next(f))
+print(x.join(y))   #dabceabcf  以 x 做分隔符
+print('*'.join(y)) #d*e*f  以 * 做分隔符
+print(x.join(z))   #dabceabcf

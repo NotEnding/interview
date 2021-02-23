@@ -1,7 +1,7 @@
 #-*- coding:utf-8 _*- 
 """ 
-@file: Fibonacci.py 
-@time: 2021/02/22
+@file: monkeypatch.py 
+@time: 2021/02/23
 @site:  
 @software: PyCharm 
 
@@ -21,22 +21,29 @@
                   ┗┻┛  ┗┻┛ 
 """
 
+
+''''
+猴子补丁
 '''
-0 1 1 2 3 5 8 13 21 34 55
-斐波那契数列----yield 用法
+
+import requests
+
+#源代码
+def get_page(url):
+	try:
+		s = requests.get(url)
+	except requests.HTTPError as e:
+		print("HTTPError")
+
+def get(url):
+	raise requests.HTTPError
+
+
+'''
+我们为requests.get打了猴子补丁，这样我们就可以测试get_page方法能否正确处理异常了，
+这样做既不需要为requests.get构造能抛出异常的url 输入参数，也不需要改变requests.get的源代码。
 '''
 
-
-def fab(max):
-    n, a, b = 0, 0, 1
-    while n < max:
-        yield b  # 使用 yield ，相当于return,下一步直接从这里开始执行
-        print(f"a:{a},b:{b}")
-        a, b = b, a + b
-        print(f"a>>>{a},b>>>{b}")
-        n = n + 1
-
-
-f = fab(11)
-for i in range(10):
-    print(next(f))
+if __name__ == "__main__":
+	requests.get = get    #猴子补丁
+	get_page("123")
