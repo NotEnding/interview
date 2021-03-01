@@ -56,7 +56,7 @@ def acquire_lock(lock_name, acquire_time=10, time_out=10):
             # 给锁设置超时时间, 防止进程崩溃导致其他进程无法获取锁
             redis_client.expire(lock, time_out)
             return identifier
-        elif not redis_client.ttl(lock):
+        elif not redis_client.ttl(lock): #如果已经到期了
             redis_client.expire(lock, time_out)
         time.sleep(0.001)
     return False
